@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PaymentDetailService } from '../shared/payment-detail.service';
 import { PaymentDetailModel } from '../shared/payment-detail-model.model';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -10,19 +11,43 @@ import { PaymentDetailModel } from '../shared/payment-detail-model.model';
 })
 export class PaymentDetailsComponent implements OnInit {
 
-  constructor(private service : PaymentDetailService){}
+  constructor(private service : PaymentDetailService,private toast:ToastrService){}
 
-  paymentDetails:PaymentDetailModel[]=[]
+  paymentDetails:PaymentDetailModel[]=[
+    
+  ]
 
   ngOnInit(): void {
+    this.fetchData();
+    
+    
+    this.service.changeData.subscribe(s=>{
+      this.fetchData();
+    })
+
+  }
+
+
+  fetchData(){
     this.service.fetchData().subscribe(res=>{
       console.log(res);
       
       this.paymentDetails=res as PaymentDetailModel[]
     })
-    console.log("Welcome");
-    
+  }
+
+  updateData(data:PaymentDetailModel){
+    this.service.formData=Object.assign({},data)
 
   }
 
+  deleteData(id:number){
+    if(confirm('yes'))
+    this.service.deleteRecord(id).subscribe(res=>{
+      this.service.changeData.next(res as PaymentDetailModel);
+      
+      this.toast.success("Data Deleted", "PaymentDetail")
+    })
+
+  }
 }

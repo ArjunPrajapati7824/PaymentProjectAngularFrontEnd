@@ -7,6 +7,9 @@ import { PaymentDetailsComponent } from './payment-details/payment-details.compo
 import { PaymentDetailsFormComponent } from './payment-details/payment-details-form/payment-details-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -20,7 +23,9 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

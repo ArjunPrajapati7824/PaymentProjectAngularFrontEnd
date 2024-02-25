@@ -1,4 +1,7 @@
-<form #formData="ngForm" (ngSubmit)="addPaymentDetail()">
+<form #formData="ngForm" (ngSubmit)="addPaymentDetail(formData)"
+[class.submitted]="service.formSubmited"
+autocomplete="off"
+>
 
      <input type="hidden" name="paymentDetailId" [value]="service.formData.paymentDetailId">
     <div class="mb-3">
@@ -7,8 +10,10 @@
         placeholder="Name On Card"
         #cardOwnerName="ngModel"
         name="cardOwnerName"
-        [(ngModel)]="service.formData.cardOwnerName">
+        [(ngModel)]="service.formData.cardOwnerName"
+        required>
     </div>
+    <p style="color: red;" *ngIf="cardOwnerName.invalid && cardOwnerName.touched">*Required Field</p>
 
     <div class="mb-3">
         <label>Card Number </label>
@@ -17,8 +22,13 @@
         placeholder="Enter 16 digit Card Number"
         #cardNumebr="ngModel"
         name="cardNumebr"
-        [(ngModel)]="service.formData.cardNumebr">
+        [(ngModel)]="service.formData.cardNumebr"
+        minlength="16"
+        maxlength="16"
+        required>
     </div>
+    <p style="color: red;" *ngIf="cardNumebr.invalid && cardNumebr.touched">*Required Field</p>
+
 
     <div class="row">
         <div class="mb-3 col-6">
@@ -28,8 +38,13 @@
             placeholder="CVV"
             #securityCode="ngModel"
             name="securityCode"
-            [(ngModel)]="service.formData.securityCode">
+            [(ngModel)]="service.formData.securityCode"
+            minlength="3"
+            maxlength="3"
+            required>
         </div>
+    <p style="color: red;" *ngIf="securityCode.invalid && securityCode.touched">*Required Field</p>
+
 
         <div class="mb-3 col-6">
             <label>Valid Throw</label>
@@ -37,12 +52,15 @@
             placeholder="MM/YY"
             #expirationDate="ngModel"
             name="expirationDate"
-            [(ngModel)]="service.formData.expirationDate">
+            [(ngModel)]="service.formData.expirationDate"
+            required>
         </div>
+    <p style="color: red;" *ngIf="expirationDate.invalid && expirationDate.touched">*Required Field</p>
+
     
         
     
     </div>
     
-    <button class="btn btn-success" type="submit"> Submit </button>
+    <button class="btn btn-success" type="submit" [disabled]="formData.invalid"> Submit </button>
 </form>

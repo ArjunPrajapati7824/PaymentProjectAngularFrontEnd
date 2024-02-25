@@ -20,7 +20,8 @@
                 <div class="fw-bold">{{data.expirationDate}}</div>
              </div>
              <span class="text-secondary">
-                <i class=" text-danger bi bi-trash-fill"></i>
+                <i class=" text-danger bi bi-trash-fill" (click)="deleteData(data.paymentDetailId)"></i>&nbsp;&nbsp;
+                <i class="bi bi-pen-fill" (click)="updateData(data)"></i>
              </span>
             </li>
         </ul>

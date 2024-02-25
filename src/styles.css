@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-.mouse-hover{
+/* .mouse-hover{
     cursor: pointer;
-}
+} */
 
 form label{
     text-transform :uppercase;
@@ -16,4 +16,13 @@ form input{
 form input::placeholder{
     color: #c0bdbd;
     font-weight: 300;
+}
+
+/* form.submitted input.ng-invalid{
+    border: 1px solid red;
+} */
+
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+
 }
